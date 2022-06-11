@@ -1,0 +1,100 @@
+.loginForm {
+    position: relative;
+    height: 600px;
+    width: 350px;
+    background-color: black;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+.banner {
+    display: flex;
+    justify-content: space-evenly;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    background-color: black;
+}
+.bannerLetters {
+    color: green;
+    font-size: 16px;
+    font-family: 'Press Start 2P', monospace;
+}
+.email {
+    position: absolute;
+    top: 300px;
+}
+.emailInput {
+    font-family: 'Space Mono', monospace;
+    background-color: black;
+    color: white;
+    outline: none;
+    border: 1px solid white;
+}
+.displayName {
+    position: absolute;
+    top: 300px;
+}
+.displayNameInput {
+    font-family: 'Space Mono', monospace;
+    background-color: black;
+    color: white;
+    outline: none;
+    border: 1px solid white;
+}
+
+.password {
+    position: absolute;
+    top: 350px;
+}
+.passwordInput {
+    background-color: black;
+    color: white;
+    outline: none;
+    border: 1px solid white;
+}
+.loginButton {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    font-family: 'Space Mono', monospace;
+    position: absolute;
+    top: 400px;
+}
+.createAccountButton {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    font-family: 'Space Mono', monospace;
+    position: absolute;
+    top: 450px;
+}
+
+.createAccountPopUpWindow {
+    position: absolute;
+    z-index: 999;
+    background-color: #010082;
+    color: white;
+    height: 250px;
+    width: 300px;
+    top: 250px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+}
+.createAccountPopUpWindowText {
+    margin-top: 75px;
+}
+
+.createAccountPopUpWindowButton {
+    font-size: 12px;
+    cursor: pointer;
+    height: 40px;
+    border: 5px solid #010082;
+    font-family: 'Press Start 2P', monospace;
+}

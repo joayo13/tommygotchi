@@ -1,0 +1,374 @@
+
+
+.loading {
+    position: absolute;
+    z-index: 999;
+    color: green;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 300px;
+    background-color: black;
+    height: 600px;
+    width: 350px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.screen {
+    position: relative;
+    height: 600px;
+    width: 350px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url('./tommyroom.png');
+    background-size: cover;
+    overflow: hidden;
+}
+.soundIcon {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background-size: cover;
+    height: 25px;
+    width: 25px;
+    z-index: 5;
+}
+
+
+.tommy {
+    z-index: 3;
+    position: absolute;
+    bottom: -16px;
+    height: 125px;
+    width: 125px;
+}
+.banner {
+    display: flex;
+    justify-content: space-evenly;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    background-color: black;
+}
+.bannerLetters {
+    color: rgb(196, 0, 0);
+    font-size: 16px;
+    font-family: 'Press Start 2P', monospace;
+}
+.userInfo {
+    text-align: center;
+    font-size: 8px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    top: 30px;
+    background-color: black;
+    position: absolute;
+    height: 45px;
+    width: 100%;
+}
+.userInfoAge {
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    top: 25px;
+    background-color: black;
+    position: absolute;
+    height: 30px;
+    width: 120px;
+}
+.userInfoLevel {
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    top: 25px;
+    left: 120px;
+    background-color: black;
+    position: absolute;
+    height: 30px;
+    width: 120px;
+}
+.userInfoXP {
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    top: 25px;
+    left: 240px;
+    background-color: black;
+    position: absolute;
+    height: 30px;
+    width: 120px;
+}
+.logoutButton {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    font-size: 10px;
+    font-family: 'Press Start 2P', monospace;
+    cursor: pointer;
+}
+.options {
+    position: absolute;
+    top: 80px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: black;
+    width: 100%;
+    height: 100px;
+}
+.icons {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+}
+.statInfoBox {
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    background-color: black;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.statInfo {
+    display: flex;
+    align-items: center;
+    font-family: 'Press Start 2P', monospace;
+    position: relative;
+    color: white;
+    width: 100%;
+    font-size: 8px;
+}
+.foodAmount {
+    color: yellow;
+}
+.disciplineAmount {
+    color:red;
+}
+.hygieneAmount {
+    color: green;
+}
+.abuseAmount {
+    color: orange;
+}
+.healthBar {
+    position: absolute;
+    height: 100px;
+    width: 200px;
+}
+.healthBarOuter {
+    z-index: 4;
+    top: 220px;
+    left: 75px;
+    position: absolute;
+    height: 100px;
+    width: 175px;
+    overflow: hidden;
+}
+
+.statBarOuter {
+    top: 0px;
+    margin-left: 5px;
+    border: 1px solid white;
+    width: 100px;
+    height: 10px;
+}
+
+.statBarInner {
+    background-color: yellow;
+    height: 100%;
+}
+
+.chatBoxOuter {
+    z-index: 5;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 100px;
+}
+.chatBoxInner {
+    font-size: 16px;
+    color: white;
+}
+
+.poop {
+    position: absolute;
+    bottom: -12px;
+    z-index: 5;
+    width: 50px;
+    height: 50px;
+}
+
+.noSelect {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.noSelect:focus {
+    outline: none !important;
+}
+.abusePopUpWindow {
+    position: absolute;
+    z-index: 999;
+    background-color: #010082;
+    color: white;
+    height: 250px;
+    width: 300px;
+    top: 320px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+}
+.abusePopUpWindowText {
+    margin-top: 75px;
+}
+
+.abusePopUpWindowButton {
+    font-size: 12px;
+    cursor: pointer;
+    height: 40px;
+    border: 5px solid #010082;
+    font-family: 'Press Start 2P', monospace;
+}
+.shopPopUpWindow {
+    position: absolute;
+    z-index: 998;
+    background-color: #010082;
+    color: white;
+    height: 250px;
+    width: 300px;
+    left: 25px;
+    top: 70px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+}
+.shopPopUpWindowText {
+    margin-top: 75px;
+}
+
+.shopPopUpWindowButton {
+    font-size: 12px;
+    cursor: pointer;
+    height: 40px;
+    border: 5px solid #010082;
+    font-family: 'Press Start 2P', monospace;
+}
+.inventory {
+    position: absolute;
+    top: 250px;
+    background-color: black;
+    color: white;
+    border: none;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 8px;
+    font-family: 'Press Start 2P', monospace;
+    right: 10px;
+    height: 40px;
+}
+
+.cash {
+    position: absolute;
+    top: 260px;
+    font-size: 16px;
+    color: rgb(173, 240, 173);
+    font-family: 'Press Start 2P', monospace;
+    left: 10px;
+    height: 40px;
+}
+.shopWindow {
+    position: absolute;
+    top: 240px;
+    z-index: 10;
+    width: 100%;
+    height: 375px;
+    background-color: rgb(29, 29, 29);
+}
+.shopWindowExit {
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    text-indent: 3px;
+    height: 40px;
+    width: 40px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    z-index: 11;
+}
+.shopWindowCash {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+    width: 300px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    z-index: 11;
+}
+.shopItemContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 80%;
+    top: 50px;
+
+}
+.shopItem {
+    height: 70px;
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    position: relative;
+}
+.shopItemImage {
+    position: absolute;
+    top: 0px;
+    height: 50px;
+    width: 50px;
+}
+.shopItemPrice {
+    position: absolute;
+    color: rgb(209, 195, 0);
+    bottom: 2px;
+    width: 100%;
+    height: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    text-align: center;
+}
+.inventoryContainer {
+    position: absolute;
+    top: 240px;
+    z-index: 10;
+    width: 100%;
+    height: 375px;
+    background-color: rgb(29, 29, 29);
+}
+.hatContainer {
+    z-index: 4;
+    position: absolute;
+    height: 100px;
+    width: 125px;
+    bottom: 75px;
+}
