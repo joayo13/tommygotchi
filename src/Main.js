@@ -124,6 +124,7 @@ function Main(props) {
                 setHygieneAmount(0)
                 if(timePassed >= 200000) {
                     setHp(-175)
+                    setMood(tommyDead)
                     setDisciplineAmount(0)
                 }
                 if(timePassed >= 100000 && timePassed < 200000) {
