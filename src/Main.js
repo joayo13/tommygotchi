@@ -124,20 +124,46 @@ function Main(props) {
                 setHygieneAmount(0)
                 if(timePassed >= 200000) {
                     setHp(-175)
-                    setMood(tommyDead)
                     setDisciplineAmount(0)
+                    setMood(tommyDead)
+                    setTranslateXValue(130)
+                    setInventory(docSnap.data().inventory)
+                    setCurrentHat(docSnap.data().currentHat)
+                    setCashAmount(docSnap.data().cashAmount)
+                    setAbuse(docSnap.data().abuse)
+                    setAbuseAmount(docSnap.data().abuseAmount)
+                    setPoopX(docSnap.data().poopX)
+                    setLoaded(true)
+                    return
                 }
                 if(timePassed >= 100000 && timePassed < 200000) {
-                    setMood(tommySad)
                     setHp(docSnap.data().hp - 125)
                     setDisciplineAmount(docSnap.data().disciplineAmount - 10)
                     setDisciplineDisabled(false)
+                    setTranslateXValue(130)
+                    setInventory(docSnap.data().inventory)
+                    setCurrentHat(docSnap.data().currentHat)
+                    setCashAmount(docSnap.data().cashAmount)
+                    setAbuse(docSnap.data().abuse)
+                    setAbuseAmount(docSnap.data().abuseAmount)
+                    setPoopX(docSnap.data().poopX)
+                    setLoaded(true)
+                    return
+
                 }
                 if(timePassed >= 50000 && timePassed < 100000) {
-                    setMood(tommySad) 
                     setHp(docSnap.data().hp - 50)
                     setDisciplineDisabled(false)
                     setDisciplineAmount(docSnap.data().disciplineAmount - 5)
+                    setTranslateXValue(130)
+                    setInventory(docSnap.data().inventory)
+                    setCurrentHat(docSnap.data().currentHat)
+                    setCashAmount(docSnap.data().cashAmount)
+                    setAbuse(docSnap.data().abuse)
+                    setAbuseAmount(docSnap.data().abuseAmount)
+                    setPoopX(docSnap.data().poopX)
+                    setLoaded(true)
+                    return
                 }
             } else {
                 setFoodAmount(docSnap.data().foodAmount - timePassedFoodAmount)
@@ -146,14 +172,29 @@ function Main(props) {
                 setHygieneAmount(docSnap.data().hygieneAmount - timePassedHygieneAmount)
                 setDisciplineDisabled(docSnap.data().disciplineDisabled)
                 setDisciplineAmount(docSnap.data().disciplineAmount)
-                setMood(docSnap.data().mood)
+                setTranslateXValue(130)
+                setInventory(docSnap.data().inventory)
+                setCurrentHat(docSnap.data().currentHat)
+                setCashAmount(docSnap.data().cashAmount)
+                setAbuse(docSnap.data().abuse)
+                setAbuseAmount(docSnap.data().abuseAmount)
+                setPoopX(docSnap.data().poopX)
+                setLoaded(true)
+                return
             }
+            setFoodAmount(docSnap.data().foodAmount - timePassedFoodAmount)
+            setHp(docSnap.data().hp)
+            setPoopX(docSnap.data().poopX)
+            setHygieneAmount(docSnap.data().hygieneAmount - timePassedHygieneAmount)
+            setDisciplineDisabled(docSnap.data().disciplineDisabled)
+            setDisciplineAmount(docSnap.data().disciplineAmount)
             setTranslateXValue(130)
             setInventory(docSnap.data().inventory)
             setCurrentHat(docSnap.data().currentHat)
             setCashAmount(docSnap.data().cashAmount)
             setAbuse(docSnap.data().abuse)
             setAbuseAmount(docSnap.data().abuseAmount)
+            setPoopX(docSnap.data().poopX)
             setLoaded(true)
         }
     }
@@ -221,7 +262,7 @@ function Main(props) {
     }
 
     const translateXHandler = (timer) => {
-        if(mood === tommyDead) {
+        if(mood === tommyDead || mood === '/static/media/tommydead.25a96e656a4eefa3d09f.png') {
             return null
         }
         clearTimeout(timer)
@@ -437,7 +478,7 @@ function Main(props) {
         if (loaded === true) {
         calculateMood()
         }
-    },[foodAmount, abuseAmount])
+    })
 
     const signOutHandler = () => {
         const auth = getAuth();
