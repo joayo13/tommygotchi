@@ -8,6 +8,10 @@ const topHat = require('./tophat.png')
 
 const bronzeSword = require('./bronzesword.png')
 
+const wizardHat = require('./wizardhat.png')
+
+const redWizardHat = require('./redwizardhat.png')
+
 function ShopWindow(props) {
     const shopBuyHandler = (item) => {
         if(props.cashAmount - item.price >= 0) {
@@ -43,7 +47,7 @@ function ShopWindow(props) {
                 <div className='shopItemPrice'>$20</div>
             </div>
             <div className='shopItem'>
-                <img className='shopItemImage' src={topHat} onClick={() => props.shopBuyHandler({name: 'Top Hat', 
+                <img className='shopItemImage' src={topHat} onClick={() => shopBuyHandler({name: 'Top Hat', 
                 image: topHat,
                 price: 100, 
                 type: 'hat',
@@ -51,14 +55,29 @@ function ShopWindow(props) {
                 <div className='shopItemPrice'>$100</div>
             </div>
             <div className='shopItem'>
-                <img className='shopItemImage' src={bronzeSword} onClick={() => props.shopBuyHandler({name: 'Bronze Sword', 
+                <img className='shopItemImage' src={bronzeSword} onClick={() => shopBuyHandler({name: 'Bronze Sword', 
                 image: bronzeSword,
                 price: 50, 
                 type: 'weapon',
                 })}></img>
                 <div className='shopItemPrice'>$50</div>
             </div>
-            <span style={{color: 'white'}}>MORE ITEMS COMING SOON</span>
+            <div className='shopItem'>
+            <img className='shopItemImage' src={wizardHat} onClick={() => shopBuyHandler({name: 'Wizard Hat', 
+                image: wizardHat,
+                price: 500, 
+                type: 'hat',
+                })}></img>
+                <div className='shopItemPrice'>$500</div>
+            </div>
+            <div className='shopItem'>
+            <img className='shopItemImage' src={redWizardHat} onClick={() => shopBuyHandler({name: 'Red Wizard Hat', 
+                image: redWizardHat,
+                price: 2000, 
+                type: 'hat',
+                })}></img>
+                <div className='shopItemPrice'>$2000</div>
+            </div>
             </div>
         </div>
   )
