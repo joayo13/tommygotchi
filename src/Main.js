@@ -147,6 +147,7 @@ function Main(props) {
                     setAbuse(docSnap.data().abuse)
                     setAbuseAmount(docSnap.data().abuseAmount)
                     setPoopX(docSnap.data().poopX)
+                    setMood(docSnap.data().mood)
                     setLoaded(true)
                     return
 
@@ -162,6 +163,7 @@ function Main(props) {
                     setAbuse(docSnap.data().abuse)
                     setAbuseAmount(docSnap.data().abuseAmount)
                     setPoopX(docSnap.data().poopX)
+                    setMood(docSnap.data().mood)
                     setLoaded(true)
                     return
                 }
@@ -179,6 +181,7 @@ function Main(props) {
                 setAbuse(docSnap.data().abuse)
                 setAbuseAmount(docSnap.data().abuseAmount)
                 setPoopX(docSnap.data().poopX)
+                setMood(docSnap.data().mood)
                 setLoaded(true)
                 return
             }
@@ -195,7 +198,9 @@ function Main(props) {
             setAbuse(docSnap.data().abuse)
             setAbuseAmount(docSnap.data().abuseAmount)
             setPoopX(docSnap.data().poopX)
+            setMood(docSnap.data().mood)
             setLoaded(true)
+            
         }
     }
 
@@ -243,7 +248,7 @@ function Main(props) {
     let movementTimer = useRef(null)
 
     useEffect(() => {
-        if(loaded === true) {
+        if(loaded === true && mood !== tommyDead) {
         movementTimer.current = setTimeout(() => translateXHandler(movementTimer.current), 1000);
         }
         return () => {
@@ -262,9 +267,6 @@ function Main(props) {
     }
 
     const translateXHandler = (timer) => {
-        if(mood === tommyDead || mood === '/static/media/tommydead.25a96e656a4eefa3d09f.png') {
-            return null
-        }
         clearTimeout(timer)
         movementTimer.current = null
         let directionRandomizerResult = directionRandomizer()
