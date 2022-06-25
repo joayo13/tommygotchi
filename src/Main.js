@@ -113,7 +113,6 @@ function Main(props) {
             console.log(currentTime - docSnap.data().birth)
             console.log(currentTime)
             console.log(tommyAgeCalculator)
-            tommyAge = tommyAgeCalculator
             
             if(timePassed >= 10000) {
                 setDisciplineDisabled(false)
@@ -149,6 +148,7 @@ function Main(props) {
                     setPoopX(docSnap.data().poopX)
                     setMood(docSnap.data().mood)
                     setLoaded(true)
+                    tommyAge = tommyAgeCalculator
                     return
 
                 }
@@ -165,6 +165,7 @@ function Main(props) {
                     setPoopX(docSnap.data().poopX)
                     setMood(docSnap.data().mood)
                     setLoaded(true)
+                    tommyAge = tommyAgeCalculator
                     return
                 }
             } else {
@@ -182,6 +183,7 @@ function Main(props) {
                 setAbuseAmount(docSnap.data().abuseAmount)
                 setPoopX(docSnap.data().poopX)
                 setMood(docSnap.data().mood)
+                tommyAge = tommyAgeCalculator
                 setLoaded(true)
                 return
             }
@@ -199,6 +201,7 @@ function Main(props) {
             setAbuseAmount(docSnap.data().abuseAmount)
             setPoopX(docSnap.data().poopX)
             setMood(docSnap.data().mood)
+            tommyAge = tommyAgeCalculator
             setLoaded(true)
             
         }
@@ -592,7 +595,7 @@ function Main(props) {
              shopPopUp={shopPopUp}
             /> : null}
             <button className='inventory' onClick={() => setInventoryDisplay(true)}>Inventory</button>
-            {inventoryDisplay ? 
+            {inventoryDisplay && mood !== tommyDead ? 
             <div className='inventoryContainer'>
                 {inventoryPopUp}
                 <button className='shopWindowExit' onClick={() => setInventoryDisplay(null)}>X</button>
