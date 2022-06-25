@@ -115,7 +115,7 @@ function Main(props) {
             console.log(tommyAgeCalculator)
             tommyAge = tommyAgeCalculator
             
-            if(timePassed >= 40000) {
+            if(timePassed >= 10000) {
                 setDisciplineDisabled(false)
             }
             
@@ -123,7 +123,7 @@ function Main(props) {
                 setFoodAmount(0)
                 setHygieneAmount(0)
                 if(timePassed >= 200000) {
-                    setHp(-175)
+                    setHp(25)
                     setDisciplineAmount(0)
                     setMood(tommyDead)
                     setTranslateXValue(130)
@@ -294,7 +294,6 @@ function Main(props) {
             setTimeout(() => {setAbuseAmount(prevAbuseAmount => prevAbuseAmount + 10); setCurrentDialogue('OW MASTER'); setTommyDamaged(true)}, 1000)
             setAbuseDisabled(true)
             setTimeout(() => {setAbuseDisabled(false); setCurrentDialogue(null)}, 4000)
-            setTimeout(() => setTommyDamaged(false), 20000)
         }     
     }
 
@@ -400,7 +399,7 @@ function Main(props) {
     let hygieneTimer = useRef(null)
 
     useEffect(() => {
-        if(loaded === true) {
+        if(loaded === true || mood !== tommyDead) {
         hygieneTimer.current = setTimeout(() => hygieneAmountHandler(hygieneTimer.current), 20000);
         }
         return () => {
