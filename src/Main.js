@@ -52,7 +52,7 @@ const shop = require('./shop.png')
 const battle = require('./battle.png')
 
 const tommyRoom = require('./tommyroom.png')
-
+const inventory = require('./inventoryicon.png')
 // poop
 const poop = require('./poop.png')
 const healthBar = require('./healthbar.png')
@@ -594,7 +594,7 @@ function Main(props) {
              cashAmount={cashAmount}
              shopPopUp={shopPopUp}
             /> : null}
-            <button className='inventory' onClick={() => setInventoryDisplay(true)}>Inventory</button>
+            <div className='inventory' onClick={() => setInventoryDisplay(true)}></div>
             {inventoryDisplay && mood !== tommyDead ? 
             <div className='inventoryContainer'>
                 {inventoryPopUp}
