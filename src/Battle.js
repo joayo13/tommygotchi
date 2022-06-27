@@ -59,14 +59,14 @@ const enemies = [
   },
   {
     name: 'denny',
-    hp: 1,
+    hp: 4,
     image: denny,
-    def: 0,
+    def: 5,
     attack: 0,
-    strength: 1,
+    strength: 2,
     loot: '50$',
-    cash: 50,
-    xp: 25,
+    cash: 100,
+    xp: 20,
     attacks: ['quick attack']
   },
 ]
