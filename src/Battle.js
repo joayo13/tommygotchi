@@ -44,30 +44,37 @@ const playSound = require('./playsound.png')
 
 const muteSound = require('./mutesound.png')
 
-const enemies = [
-  {
-    name: 'mark',
-    hp: 7,
-    image: mark,
-    def: 5,
-    attack: 5,
-    strength: 3,
-    loot: '200$',
-    cash: 200,
-    attacks: ['quick attack'],
-    xp: 50,
-  },
+const enemiesLevel1to3 = [
+  
   {
     name: 'denny',
     hp: 4,
     image: denny,
     def: 5,
     attack: 0,
-    strength: 2,
+    strength: 1,
     loot: '50$',
-    cash: 100,
-    xp: 20,
+    cash: 50,
+    xp: 10,
     attacks: ['quick attack']
+  },
+]
+const enemiesLevel4to6 = []
+
+const enemiesLevel6to8 = []
+
+const enemiesLevel8to10 = [
+  {
+    name: 'mark',
+    hp: 20,
+    image: mark,
+    def: 10,
+    attack: 10,
+    strength: 4,
+    loot: '10000$',
+    cash: 10000,
+    attacks: ['quick attack'],
+    xp: 50,
   },
 ]
 
@@ -127,9 +134,12 @@ function Battle(props) {
     }
   }
   useEffect(() => {
-    let random = Math.floor(Math.random() * enemies.length)
-    setEnemy(enemies[random])
+    if(playerLevel <= 3) {
+      let random = Math.floor(Math.random() * enemiesLevel1to3.length)
+    setEnemy(enemiesLevel1to3[random])
     setEnemyLoaded(true)
+    }
+    
   },[])
 
   useEffect(() => {
