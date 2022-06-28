@@ -36,6 +36,8 @@ const tommyHappy = require('./tommyhappy.png');
 
 const denny = require('./denny.png')
 
+const lisasMom = require('./lisasmom.png')
+
 const mark = require('./mark.png')
 
 const battleBox = require('./battlebox.png')
@@ -44,18 +46,30 @@ const playSound = require('./playsound.png')
 
 const muteSound = require('./mutesound.png')
 
-const enemiesLevel1to3 = [
+const enemiesLevel0to3 = [
   
   {
     name: 'denny',
-    hp: 4,
+    hp: 2,
     image: denny,
-    def: 5,
+    def: 8,
     attack: 0,
-    strength: 1,
+    strength: 2,
     loot: '50$',
     cash: 50,
     xp: 10,
+    attacks: ['quick attack']
+  },
+  {
+    name: `lisa's mom`,
+    hp: 5,
+    image: lisasMom,
+    def: 4,
+    attack: 0,
+    strength: 1,
+    loot: '70$',
+    cash: 70,
+    xp: 15,
     attacks: ['quick attack']
   },
 ]
@@ -135,8 +149,8 @@ function Battle(props) {
   }
   useEffect(() => {
     if(playerLevel <= 3) {
-      let random = Math.floor(Math.random() * enemiesLevel1to3.length)
-    setEnemy(enemiesLevel1to3[random])
+      let random = Math.floor(Math.random() * enemiesLevel0to3.length)
+    setEnemy(enemiesLevel0to3[random])
     setEnemyLoaded(true)
     }
     
