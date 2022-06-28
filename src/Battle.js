@@ -50,11 +50,11 @@ const enemiesLevel0to3 = [
   
   {
     name: 'denny',
-    hp: 2,
+    hp: 5,
     image: denny,
-    def: 8,
-    attack: 0,
-    strength: 2,
+    def: 12,
+    attack: 10,
+    strength: 1,
     loot: '50$',
     cash: 50,
     xp: 10,
@@ -62,11 +62,11 @@ const enemiesLevel0to3 = [
   },
   {
     name: `lisa's mom`,
-    hp: 5,
+    hp: 8,
     image: lisasMom,
-    def: 4,
-    attack: 0,
-    strength: 1,
+    def: 8,
+    attack: 4,
+    strength: 2,
     loot: '70$',
     cash: 70,
     xp: 15,
@@ -181,6 +181,14 @@ function Battle(props) {
             setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
             return
           }
+          if(d20 === 20) {
+          setPlayerHp(prevPlayerHp => prevPlayerHp - (enemy.strength * 2))
+          setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setAttackMessage(`${enemy.name} used ${attack}, it's a critical hit!`)
+          setPlayerHpModifier(`-${enemy.strength * 2}`)
+          setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
+          return
+          }
           setPlayerHp(prevPlayerHp => prevPlayerHp - enemy.strength)
           setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
           setAttackMessage(`${enemy.name} used ${attack}`)
@@ -203,6 +211,14 @@ function Battle(props) {
             setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
             setEnemyHpModifier(`-${playerStats.str}`)
             setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setEnemyHpModifier(null)}, 2000)
+          }
+          if(d20 === 20) {
+          setEnemyHp(prevEnemyHp => prevEnemyHp - (playerStats.str * 2))
+          setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setAttackMessage(`tommy used ${attack}, it's a critical hit!`)
+          setEnemyHpModifier(`-${playerStats.str * 2}`)
+          setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000) 
+          return
           }
           setEnemyHp(prevEnemyHp => prevEnemyHp - playerStats.str)
           setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
