@@ -309,6 +309,7 @@ function Battle(props) {
 
   async function levelUpHandler(stat) {
     console.log(stat)
+    playerStats[stat] = playerStats[stat] + 1
     await setDoc(doc(db, "users", props.userId), {
       level: playerLevel + 1,
       combatStats: {
