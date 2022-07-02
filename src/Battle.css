@@ -90,6 +90,17 @@
     bottom: 200px;
     left: 10px;
 }
+.playerHead {
+    position: absolute;
+    height: 125px;
+    width: 125px;
+}
+.playerHat {
+    position: absolute;
+    bottom: 90px;
+    height: 100px;
+    width: 125px;
+}
 .soundIcon {
     position: absolute;
     right: 10px;

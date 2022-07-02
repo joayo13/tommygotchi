@@ -128,6 +128,8 @@ function Battle(props) {
 
   const [playerCash, setPlayerCash] = useState(null)
 
+  const [playerHat, setPlayerHat] = useState(null)
+
   const [enemyLoaded, setEnemyLoaded] = useState(false)
 
   const [musicPlaying, setMusicPlaying] = useState(true)
@@ -158,6 +160,7 @@ function Battle(props) {
       setPlayerXp(docSnap.data().xp)
       setPlayerCash(docSnap.data().cashAmount)
       setPlayerLevel(docSnap.data().level)
+      setPlayerHat(docSnap.data().currentHat)
       setLoaded(true)
     }
   }
@@ -330,7 +333,14 @@ function Battle(props) {
   <div className='enemyHpModifier'>{enemyHpModifier}</div>
     <div className='enemyHpOuter'><div className='enemyHpInner' style={enemyHp > 0 ? {width: `${(enemyHp / enemy.hp) * 100}%`} : {width: '0%'}}></div></div>
   </div> : null}
-    <img className='player' src={tommyHappy} style={playerAnimation !== {} ? {animationName: playerAnimation.name, animationDirection: playerAnimation.direction, animationDuration: playerAnimation.duration, animationIterationCount: playerAnimation.iteration, animationTimingFunction: playerAnimation.timingFunc} : undefined}></img>
+    <div className='player' style={playerAnimation !== {} ? 
+    {animationName: playerAnimation.name, animationDirection: playerAnimation.direction,
+     animationDuration: playerAnimation.duration, animationIterationCount: playerAnimation.iteration,
+      animationTimingFunction: playerAnimation.timingFunc} : undefined}>
+    <img className='playerHead' src={tommyHappy} ></img>
+    <img className='playerHat' src={playerHat}></img>
+    </div>
+    
   {healthBarVisible ? <div className ='playerInfo'>
     <div className='playerHpModifier'>{playerHpModifier}</div>
     <div className='playerHpOuter'><div className='playerHpInner' style={playerHp > 0 ? {width: `${(playerHp / playerStats.hp) * 100}%`} : {width: '0%'}}></div></div>
