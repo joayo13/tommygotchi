@@ -356,12 +356,11 @@ function Battle(props) {
     </div>
     <div className='exitBattleButton' onClick={() => exitBattleHandler()}>exit battle</div>
   </div> : null}
-  <button className='goBack' onClick={() => props.setBattling(false)}>Go back</button>
   <div className = 'battleBox'><img className='battleBoxImage' src={battleBox}></img>
   <div className = 'battleBoxText' onClick={() => setFightMenu(true)}>FIGHT</div>
   <div className = 'battleBoxText bag'>BAG</div>
-  <div className = 'battleBoxText flee'>FLEE</div> 
-  {fightMenu ? <div className='fightMenu'>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
+  <div className = 'battleBoxText flee' onClick={() => {setAttackMessage('You ran away like a little bitch!'); setAudio('playerdefeat'); setTimeout(() => props.setBattling(false), 3000)}}>FLEE</div>
+  {fightMenu ? <div className='fightMenu'><button className='returnButton' onClick={() => setFightMenu(false)}>←</button>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div>
   {attackMessage !== '' ? <div className='attackMessageContainer'><div className='attackMessageText'>{attackMessage}</div><img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div> : <div>LOADING...</div>}

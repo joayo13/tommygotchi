@@ -6,8 +6,6 @@ const potion = require('./potion.png')
 
 const topHat = require('./tophat.png')
 
-const bronzeSword = require('./bronzesword.png')
-
 const wizardHat = require('./wizardhat.png')
 
 const redWizardHat = require('./redwizardhat.png')
@@ -53,14 +51,6 @@ function ShopWindow(props) {
                 type: 'hat',
                 })}></img>
                 <div className='shopItemPrice'>$100</div>
-            </div>
-            <div className='shopItem'>
-                <img className='shopItemImage' src={bronzeSword} onClick={() => shopBuyHandler({name: 'Bronze Sword', 
-                image: bronzeSword,
-                price: 50, 
-                type: 'weapon',
-                })}></img>
-                <div className='shopItemPrice'>$50</div>
             </div>
             <div className='shopItem'>
             <img className='shopItemImage' src={wizardHat} onClick={() => shopBuyHandler({name: 'Wizard Hat', 
