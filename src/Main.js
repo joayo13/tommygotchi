@@ -68,7 +68,7 @@ const undisciplinedDialogueOptions = ['i dont wana listen', 'i no talk', 'u suck
 
 let tommyAge = 0
 let level = 0
-
+let xp = 0
 function Main(props) {
 
     const bannerText = ['t', 'o', 'm', 'm', 'y', 'g', 'o', 't', 'c', 'h', 'i', '_','v','0','.','4']
@@ -110,9 +110,8 @@ function Main(props) {
             const timePassedFoodAmount = Math.floor(timePassed / 1000)
             const timePassedHygieneAmount = Math.floor(timePassed / 1000)
             const tommyAgeCalculator = Math.floor((currentTime - docSnap.data().birth) / 86400)
-            console.log(currentTime - docSnap.data().birth)
-            console.log(currentTime)
-            console.log(tommyAgeCalculator)
+            level = docSnap.data().level
+            xp = docSnap.data().xp
             
             if(timePassed >= 10000) {
                 setDisciplineDisabled(false)
@@ -546,8 +545,8 @@ function Main(props) {
                 {themePlaying === true ? <Theme/> : null}
                 <div className = 'userInfo'>{props.displayName} <button className='logoutButton' onClick={() => signOutHandler()}>LOGOUT</button>
                     <div className = 'userInfoAge'>{ mood !== tommyDead ? `Age: ${tommyAge} days` : 'RIP Tommy'}</div>
-                    <div className='userInfoLevel'>Level: </div>
-                    <div className='userInfoXP'>XP: 0/100</div>
+                    <div className='userInfoLevel'>Level: {level}</div>
+                    <div className='userInfoXP'>XP:{xp}/100</div>
                 </div>
         
             <div className = 'options'>
