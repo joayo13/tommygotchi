@@ -52,9 +52,9 @@ const enemiesLevel1to3 = [
   
   {
     name: 'denny',
-    hp: 4,
+    hp: 5,
     image: denny,
-    def: 12,
+    def: 14,
     attack: 10,
     strength: 2,
     loot: '50$',
@@ -66,7 +66,7 @@ const enemiesLevel1to3 = [
     name: `lisa's mom`,
     hp: 8,
     image: lisasMom,
-    def: 8,
+    def: 10,
     attack: 4,
     strength: 2,
     loot: '70$',
@@ -76,9 +76,9 @@ const enemiesLevel1to3 = [
   },
   {
    name: 'doggie',
-   hp: 18,
+   hp: 15,
    image: doggie,
-   def: 5,
+   def: 7,
    attack: 10,
    strength: 1,
    loot: '100$',
