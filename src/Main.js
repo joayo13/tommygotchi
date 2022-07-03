@@ -62,9 +62,12 @@ const playSound = require('./playsound.png')
 const muteSound = require('./mutesound.png')
 
 //dialogue options
-const happyDialogueOptions = ['oh hi master', 'haha', 'where mark?', 'hahaha', ':)', 'anyway, how is your sex life?' , 'haha, funny story master', 'i wana play! :) haha', ':p', 'can we get a football?']
-const sadDialogueOptions = ['u just a chiken - cheep cheep cheeeep', 'i fed up with this worl', 'everybody betray me', 'bitch', 'Why, Lisa, why, WHY?!', 'don tach me motherfacker']
-const undisciplinedDialogueOptions = ['i dont wana listen', 'i no talk', 'u suck hahahaha', 'fuck you haha', 'i no respect you', 'u stupid']
+const happyDialogueOptions = ['oh hi master', 'haha', 'where mark?', 'hahaha', ':)', 'anyway, how is your sex life?' , 'haha, funny story master',
+ 'i wana play! :) haha', ':p', 'can we get a football?', `today's words: captivity? depression?`, 
+ `i'm tired, i'm wasted, I love u darling`, 'if a lot of people love each other, the world would be better place to live', 'why so serious? haha', 'where lisa?',
+  'x)', '']
+const sadDialogueOptions = ['u just a chiken - cheep cheep cheeeep', 'i fed up with this worl', 'everybody betray me', 'bitch', 'Why, Lisa, why, WHY?!', 'don tach me motherfacker', '>:(', 'D:<', 'DO U UNDERSTAND LIFE?']
+const undisciplinedDialogueOptions = ['i dont wana listen', 'i no talk', 'u suck hahahaha', 'fuck you haha', 'i no respect you', 'u stupid', 'SHUT UP']
 
 let tommyAge = 0
 let level = 0
