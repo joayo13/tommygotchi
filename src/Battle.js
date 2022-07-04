@@ -76,7 +76,7 @@ const enemiesLevel1to3 = [
   },
   {
    name: 'doggie',
-   hp: 8,
+   hp: 10,
    image: doggie,
    def: 1,
    attack: 1,
