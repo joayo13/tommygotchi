@@ -54,37 +54,37 @@ const enemiesLevel1to3 = [
     name: 'denny',
     hp: 5,
     image: denny,
-    def: 10,
-    attack: 1,
+    def: 5,
+    attack: 5,
     strength: 3,
     loot: '50$',
     cash: 50,
     xp: 10,
-    attacks: ['quick attack']
+    attacks: ['quick attack', 'power attack']
   },
   {
     name: `lisa's mom`,
-    hp: 8,
+    hp: 7,
     image: lisasMom,
     def: 5,
-    attack: 5,
+    attack: 4,
     strength: 3,
     loot: '70$',
     cash: 70,
     xp: 15,
-    attacks: ['quick attack']
+    attacks: ['quick attack', 'power attack']
   },
   {
    name: 'doggie',
-   hp: 15,
+   hp: 8,
    image: doggie,
    def: 1,
    attack: 1,
-   strength: 2,
+   strength: 5,
    loot: '100$',
    cash: 100,
    xp: 20,
-   attacks: ['quick attack']
+   attacks: ['quick attack', 'power attack']
   }
 ]
 const enemiesLevel4to6 = []
@@ -105,6 +105,8 @@ const enemiesLevel8to10 = [
     xp: 50,
   },
 ]
+
+
 
 function Battle(props) {
 
@@ -150,6 +152,145 @@ function Battle(props) {
 
   const [leveledUp, setLeveledUp] = useState(false)
 
+  const quickAttackHandler = (attack, target) => {
+    let d20 = Math.ceil(Math.random() * 20)
+    const ENEMY_DMG = Math.ceil(Math.random() * (enemy.strength / 2))
+    const PLAYER_DMG = Math.ceil(Math.random() * (playerStats.str / 2))
+    if (target === 'tommy') {
+      if(d20 + enemy.attack > playerStats.def) {
+        setPlayerAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
+        if(playerHp - ENEMY_DMG <= 0) {
+          setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
+          setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setPlayerHpModifier(`-${ENEMY_DMG}`)
+          setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
+          return
+        }
+        if(d20 === 20) {
+        setPlayerHp(prevPlayerHp => prevPlayerHp - (ENEMY_DMG * 2))
+        setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`${enemy.name} used ${attack}, it's a critical hit!`)
+        setPlayerHpModifier(`-${ENEMY_DMG * 2}`)
+        setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
+        return
+        }
+        setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
+        setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`${enemy.name} used ${attack}`)
+        setPlayerHpModifier(`-${ENEMY_DMG}`)
+        setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
+  
+      } else {
+        setAttackMessage(`${enemy.name} used ${attack}, but tommy blocked it!`)
+        setTimeout(() => {setPlayerTurn(true);}, 2000)
+      }
+    }
+    if(target === 'enemy') {
+      if(d20 + playerStats.attack > enemy.def) {
+        setEnemyAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
+        if(enemyHp - PLAYER_DMG <= 0) {
+          setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
+          setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setEnemyHpModifier(`-${PLAYER_DMG}`)
+          setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setEnemyHpModifier(null)}, 2000)
+        }
+        if(d20 === 20) {
+        setEnemyHp(prevEnemyHp => prevEnemyHp - (PLAYER_DMG * 2))
+        setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`tommy used ${attack}, it's a critical hit!`)
+        setEnemyHpModifier(`-${PLAYER_DMG * 2}`)
+        setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000) 
+        return
+        }
+        setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
+        setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`tommy used ${attack}`)
+        setEnemyHpModifier(`-${PLAYER_DMG}`)
+        setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000)
+        
+      } else {
+        setAttackMessage(`tommy used ${attack}, but ${enemy.name} blocked!`)
+        setTimeout(() => {setPlayerTurn(false);}, 2000)
+      }
+    }
+  }
+  const powerAttackHandler = (attack, target) => {
+    let d20 = Math.ceil(Math.random() * 20)
+    const ENEMY_DMG = Math.ceil(Math.random() * enemy.strength + 1)
+    const PLAYER_DMG = Math.ceil(Math.random() * playerStats.str + 1)
+    if (target === 'tommy') {
+      if(d20 + (enemy.attack - 10) > playerStats.def) {
+        setPlayerAnimation({name: 'blinker', duration: '0.05s', iteration: 10, direction: 'alternate', timingFunc: 'step-start'})
+        if(playerHp - ENEMY_DMG <= 0) {
+          setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
+          setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setPlayerHpModifier(`-${ENEMY_DMG}`)
+          setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
+          return
+        }
+        if(d20 === 20) {
+          if(playerHp - (ENEMY_DMG * 2) <= 0) {
+            setPlayerHp(prevPlayerHp => prevPlayerHp - (ENEMY_DMG * 2))
+            setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+            setPlayerHpModifier(`-${ENEMY_DMG}`)
+            setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
+            return
+          }
+        setPlayerHp(prevPlayerHp => prevPlayerHp - (ENEMY_DMG * 2))
+        setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`${enemy.name} used ${attack}, it's a critical hit!`)
+        setPlayerHpModifier(`-${ENEMY_DMG * 2}`)
+        setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
+        return
+        }
+        setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
+        setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`${enemy.name} used ${attack}`)
+        setPlayerHpModifier(`-${ENEMY_DMG}`)
+        setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
+  
+      } else {
+        setAttackMessage(`${enemy.name} used ${attack}, but tommy blocked it!`)
+        setTimeout(() => setPlayerTurn(true), 2000)
+      }
+    }
+    if(target === 'enemy') {
+      if(d20 + (playerStats.attack - 10) > enemy.def) {
+        setEnemyAnimation({name: 'blinker', duration: '0.05s', iteration: 10, direction: 'alternate', timingFunc: 'step-start'})
+        if(enemyHp - PLAYER_DMG <= 0) {
+          setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
+          setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          setEnemyHpModifier(`-${PLAYER_DMG}`)
+          setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setEnemyHpModifier(null)}, 2000)
+        }
+        if(d20 === 20) {
+            if(enemyHp - (PLAYER_DMG * 2) <= 0) {
+              setEnemyHp(prevEnemyHp => prevEnemyHp - ENEMY_DMG)
+              setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+              setPlayerHpModifier(`-${PLAYER_DMG}`)
+              setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setEnemyHpModifier(null)}, 2000)
+              return
+            }
+        setEnemyHp(prevEnemyHp => prevEnemyHp - (PLAYER_DMG * 2))
+        setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`tommy used ${attack}, it's a critical hit!`)
+        setEnemyHpModifier(`-${PLAYER_DMG * 2}`)
+        setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000) 
+        return
+        }
+        setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
+        setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        setAttackMessage(`tommy used ${attack}`)
+        setEnemyHpModifier(`-${PLAYER_DMG}`)
+        setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000)
+        
+      } else {
+        setAttackMessage(`tommy used ${attack}, but ${enemy.name} blocked!`)
+        setTimeout(() => {setPlayerTurn(false);}, 2000)
+      }
+    }
+  }
+
 
   async function fetchData () {
     
@@ -185,71 +326,8 @@ function Battle(props) {
   },[enemyLoaded])
 
   const attackHandler = (attack, target) => {
-    if(target === 'tommy' && enemyHp > 0) {
-      
-      if(attack === 'quick attack') {
-        let d20 = Math.ceil(Math.random() * 20)
-        if(d20 + enemy.attack > playerStats.def) {
-          setPlayerAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
-          if(playerHp - enemy.strength <= 0) {
-            setPlayerHp(prevPlayerHp => prevPlayerHp - enemy.strength)
-            setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-            setPlayerHpModifier(`-${enemy.strength}`)
-            setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
-            return
-          }
-          if(d20 === 20) {
-          setPlayerHp(prevPlayerHp => prevPlayerHp - (enemy.strength * 2))
-          setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-          setAttackMessage(`${enemy.name} used ${attack}, it's a critical hit!`)
-          setPlayerHpModifier(`-${enemy.strength * 2}`)
-          setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
-          return
-          }
-          setPlayerHp(prevPlayerHp => prevPlayerHp - enemy.strength)
-          setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-          setAttackMessage(`${enemy.name} used ${attack}`)
-          setPlayerHpModifier(`-${enemy.strength}`)
-          setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
-
-        } else {
-          setAttackMessage(`${enemy.name} used ${attack}, but tommy blocked it!`)
-          setPlayerTurn(true)
-        }
-      }
-    } if(target === 'enemy') {
-      
-      if(attack === 'quick attack') {
-        let d20 = Math.ceil(Math.random() * 20)
-        if(d20 + playerStats.attack > enemy.def) {
-          setEnemyAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
-          if(enemyHp - playerStats.str <= 0) {
-            setEnemyHp(prevEnemyHp => prevEnemyHp - playerStats.str)
-            setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-            setEnemyHpModifier(`-${playerStats.str}`)
-            setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setEnemyHpModifier(null)}, 2000)
-          }
-          if(d20 === 20) {
-          setEnemyHp(prevEnemyHp => prevEnemyHp - (playerStats.str * 2))
-          setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-          setAttackMessage(`tommy used ${attack}, it's a critical hit!`)
-          setEnemyHpModifier(`-${playerStats.str * 2}`)
-          setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000) 
-          return
-          }
-          setEnemyHp(prevEnemyHp => prevEnemyHp - playerStats.str)
-          setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
-          setAttackMessage(`tommy used ${attack}`)
-          setEnemyHpModifier(`-${playerStats.str}`)
-          setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000)
-          
-        } else {
-          setAttackMessage(`tommy used ${attack}, but ${enemy.name} blocked!`)
-          setTimeout(() => {setPlayerTurn(false);}, 2000)
-        }
-      }
-      
-    }
+    if(attack === 'quick attack') quickAttackHandler(attack, target)
+    if(attack === 'power attack') powerAttackHandler(attack, target)
   }
 
   const enemyAttackHandler = (enemyAttacks) => {
@@ -311,12 +389,16 @@ function Battle(props) {
 }
 
   async function levelUpHandler(stat) {
-    console.log(stat)
-    playerStats[stat] = playerStats[stat] + 1
+    if(stat === 'hp') {
+      playerStats[stat] = playerStats[stat] + 2
+    } else {
+      playerStats[stat] = playerStats[stat] + 1
+    }
+    
     await setDoc(doc(db, "users", props.userId), {
       level: playerLevel + 1,
       combatStats: {
-        [stat]: playerStats[stat] + 1
+        [stat]: playerStats[stat]
       }
   }, {merge: true});
   setLeveledUp(false)
@@ -338,7 +420,7 @@ function Battle(props) {
      animationDuration: playerAnimation.duration, animationIterationCount: playerAnimation.iteration,
       animationTimingFunction: playerAnimation.timingFunc} : undefined}>
     <img className='playerHead' src={tommyHappy} ></img>
-    <img className='playerHat' src={playerHat}></img>
+    {playerHat ? <img className='playerHat' src={playerHat}></img> : null}
     </div>
     
   {healthBarVisible ? <div className ='playerInfo'>
