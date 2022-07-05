@@ -152,6 +152,16 @@
       opacity: 0;
     }
   }
+@keyframes inverter {
+    50% {
+        filter: invert(100%);
+    }
+}
+@keyframes grower {
+    50% {
+       transform: scale(1.3);
+    }
+}
 
 .attackMessageContainer {
     position: absolute;

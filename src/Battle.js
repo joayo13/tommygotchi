@@ -50,30 +50,30 @@ const muteSound = require('./mutesound.png')
 
 const enemiesLevel1to3 = [
   
-  {
-    name: 'denny',
-    hp: 5,
-    image: denny,
-    def: 5,
-    attack: 5,
-    strength: 3,
-    loot: '50$',
-    cash: 50,
-    xp: 10,
-    attacks: ['quick attack', 'power attack']
-  },
-  {
-    name: `lisa's mom`,
-    hp: 7,
-    image: lisasMom,
-    def: 5,
-    attack: 4,
-    strength: 3,
-    loot: '70$',
-    cash: 70,
-    xp: 15,
-    attacks: ['quick attack', 'power attack']
-  },
+  // {
+  //   name: 'denny',
+  //   hp: 5,
+  //   image: denny,
+  //   def: 5,
+  //   attack: 5,
+  //   strength: 3,
+  //   loot: '50$',
+  //   cash: 50,
+  //   xp: 10,
+  //   attacks: ['quick attack', 'power attack']
+  // },
+  // {
+  //   name: `lisa's mom`,
+  //   hp: 7,
+  //   image: lisasMom,
+  //   def: 5,
+  //   attack: 4,
+  //   strength: 3,
+  //   loot: '70$',
+  //   cash: 70,
+  //   xp: 15,
+  //   attacks: ['quick attack', 'power attack']
+  // },
   {
    name: 'doggie',
    hp: 10,
@@ -84,7 +84,7 @@ const enemiesLevel1to3 = [
    loot: '100$',
    cash: 100,
    xp: 20,
-   attacks: ['quick attack', 'power attack']
+   attacks: ['quick attack', 'power attack', 'leer']
   }
 ]
 const enemiesLevel4to6 = []
@@ -119,6 +119,8 @@ function Battle(props) {
   const [loaded, setLoaded] = useState(false)
 
   const [playerStats, setPlayerStats] = useState({})
+
+  const [temporaryPlayerStats, setTemporaryPlayerStats] = useState({})
 
   const [playerAnimation, setPlayerAnimation] = useState({})
 
@@ -155,9 +157,9 @@ function Battle(props) {
   const quickAttackHandler = (attack, target) => {
     let d20 = Math.ceil(Math.random() * 20)
     const ENEMY_DMG = Math.ceil(Math.random() * (enemy.strength / 2))
-    const PLAYER_DMG = Math.ceil(Math.random() * (playerStats.str / 2))
+    const PLAYER_DMG = Math.ceil(Math.random() * (temporaryPlayerStats.str / 2))
     if (target === 'tommy') {
-      if(d20 + enemy.attack > playerStats.def) {
+      if(d20 + enemy.attack > temporaryPlayerStats.def) {
         setPlayerAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
         if(playerHp - ENEMY_DMG <= 0) {
           setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
@@ -186,7 +188,7 @@ function Battle(props) {
       }
     }
     if(target === 'enemy') {
-      if(d20 + playerStats.attack > enemy.def) {
+      if(d20 + temporaryPlayerStats.attack > enemy.def) {
         setEnemyAnimation({name: 'blinker', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
         if(enemyHp - PLAYER_DMG <= 0) {
           setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
@@ -217,10 +219,10 @@ function Battle(props) {
   const powerAttackHandler = (attack, target) => {
     let d20 = Math.ceil(Math.random() * 20)
     const ENEMY_DMG = Math.ceil(Math.random() * enemy.strength + 1)
-    const PLAYER_DMG = Math.ceil(Math.random() * playerStats.str + 1)
+    const PLAYER_DMG = Math.ceil(Math.random() * temporaryPlayerStats.str + 1)
     if (target === 'tommy') {
-      if(d20 + (enemy.attack - 10) > playerStats.def) {
-        setPlayerAnimation({name: 'blinker', duration: '0.05s', iteration: 10, direction: 'alternate', timingFunc: 'step-start'})
+      if(d20 + (enemy.attack - 10) > temporaryPlayerStats.def) {
+        setPlayerAnimation({name: 'inverter', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
         if(playerHp - ENEMY_DMG <= 0) {
           setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
           setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
@@ -255,8 +257,8 @@ function Battle(props) {
       }
     }
     if(target === 'enemy') {
-      if(d20 + (playerStats.attack - 10) > enemy.def) {
-        setEnemyAnimation({name: 'blinker', duration: '0.05s', iteration: 10, direction: 'alternate', timingFunc: 'step-start'})
+      if(d20 + (temporaryPlayerStats.attack - 10) > enemy.def) {
+        setEnemyAnimation({name: 'inverter', duration: '0.1s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
         if(enemyHp - PLAYER_DMG <= 0) {
           setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
           setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
@@ -291,12 +293,41 @@ function Battle(props) {
     }
   }
 
+  const leerHandler = (attack, target) => {
+    let d20 = Math.ceil(Math.random() * 20)
+    if(target === 'tommy') {
+      if(d20 > 10) {
+        setEnemyAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setAttackMessage(`${enemy.name} used ${attack}, it lowered your defense!`)
+        setTemporaryPlayerStats(prev => ({
+          ...prev,
+          def: prev.def - 1
+        }));
+      }
+      if(d20 <= 10) {
+        setAttackMessage(`${enemy.name} used ${attack}, but it missed!`)
+      }
+      setTimeout(() => {setEnemyAnimation({}); setPlayerTurn(true)}, 2000)
+    }
+
+    if(target === 'enemy') {
+      if(d20 > 10) {
+        setEnemy(prev => ({
+          ...prev,
+          def: prev.def - 1
+        }));
+      }
+      setTimeout(() => {setPlayerTurn(false)}, 2000)
+    }
+  }
+
 
   async function fetchData () {
     
     const docSnap = await getDoc(doc(db, "users", props.userId))
     if(docSnap.exists()) {
       setPlayerStats(docSnap.data().combatStats)
+      setTemporaryPlayerStats(docSnap.data().combatStats)
       setPlayerHp(docSnap.data().combatStats.hp)
       setPlayerXp(docSnap.data().xp)
       setPlayerCash(docSnap.data().cashAmount)
@@ -328,6 +359,7 @@ function Battle(props) {
   const attackHandler = (attack, target) => {
     if(attack === 'quick attack') quickAttackHandler(attack, target)
     if(attack === 'power attack') powerAttackHandler(attack, target)
+    if(attack === 'leer') leerHandler(attack, target)
   }
 
   const enemyAttackHandler = (enemyAttacks) => {
