@@ -50,30 +50,30 @@ const muteSound = require('./mutesound.png')
 
 const enemiesLevel1to3 = [
   
-  // {
-  //   name: 'denny',
-  //   hp: 5,
-  //   image: denny,
-  //   def: 5,
-  //   attack: 5,
-  //   strength: 3,
-  //   loot: '50$',
-  //   cash: 50,
-  //   xp: 10,
-  //   attacks: ['quick attack', 'power attack']
-  // },
-  // {
-  //   name: `lisa's mom`,
-  //   hp: 7,
-  //   image: lisasMom,
-  //   def: 5,
-  //   attack: 4,
-  //   strength: 3,
-  //   loot: '70$',
-  //   cash: 70,
-  //   xp: 15,
-  //   attacks: ['quick attack', 'power attack']
-  // },
+  {
+    name: 'denny',
+    hp: 5,
+    image: denny,
+    def: 5,
+    attack: 5,
+    strength: 3,
+    loot: '50$',
+    cash: 50,
+    xp: 10,
+    attacks: ['quick attack',]
+  },
+  {
+    name: `lisa's mom`,
+    hp: 7,
+    image: lisasMom,
+    def: 5,
+    attack: 4,
+    strength: 3,
+    loot: '70$',
+    cash: 70,
+    xp: 15,
+    attacks: ['quick attack', 'power attack']
+  },
   {
    name: 'doggie',
    hp: 10,
@@ -84,7 +84,7 @@ const enemiesLevel1to3 = [
    loot: '100$',
    cash: 100,
    xp: 20,
-   attacks: ['quick attack', 'power attack', 'leer']
+   attacks: ['power attack', 'intimidate']
   }
 ]
 const enemiesLevel4to6 = []
@@ -293,11 +293,11 @@ function Battle(props) {
     }
   }
 
-  const leerHandler = (attack, target) => {
+  const intimidateHandler = (attack, target) => {
     let d20 = Math.ceil(Math.random() * 20)
     if(target === 'tommy') {
       if(d20 > 10) {
-        setEnemyAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setEnemyAnimation({name: 'grower', duration: '1s', iteration: 1, direction: 'alternate'})
         setAttackMessage(`${enemy.name} used ${attack}, it lowered your defense!`)
         setTemporaryPlayerStats(prev => ({
           ...prev,
@@ -359,7 +359,7 @@ function Battle(props) {
   const attackHandler = (attack, target) => {
     if(attack === 'quick attack') quickAttackHandler(attack, target)
     if(attack === 'power attack') powerAttackHandler(attack, target)
-    if(attack === 'leer') leerHandler(attack, target)
+    if(attack === 'intimidate') intimidateHandler(attack, target)
   }
 
   const enemyAttackHandler = (enemyAttacks) => {
