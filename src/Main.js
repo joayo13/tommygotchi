@@ -553,7 +553,7 @@ function Main(props) {
                 </div>
         
             <div className = 'options'>
-                <img className = 'food icons noSelect' src={food} onClick={() => feedTommy(10)}></img>
+                <img className = 'food icons noSelect' src={food} onClick={() => feedTommy(20)}></img>
                 <img className = 'discipline icons noSelect' src ={discipline} onClick={() => disciplineTommy()}></img>
                 <img className = 'clean icons noSelect' src={clean} onClick={() => cleanTommy()}></img>
                 <img className = 'chat icons noSelect' src ={chat} onClick={() => randomDialogue()}></img>
