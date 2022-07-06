@@ -74,7 +74,7 @@ let level = 0
 let xp = 0
 function Main(props) {
 
-    const bannerText = ['t', 'o', 'm', 'm', 'y', 'g', 'o', 't', 'c', 'h', 'i', '_','v','0','.','4']
+    const bannerText = ['t', 'o', 'm', 'm', 'y', 'g', 'o', 't', 'c', 'h', 'i', '_','v','1']
 
     //tommys happy or sad picture, controlled by a switch
     
