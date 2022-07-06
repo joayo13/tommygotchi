@@ -36,6 +36,7 @@ function ShopWindow(props) {
             <div className='shopWindowCash'>Your cash: <span style={{color: 'green'}}>${props.cashAmount}</span></div>
             <button className='shopWindowExit noSelect'onClick={() => {props.setShopDisplay(false); props.setShopPopUp(null)}}>X</button>
             <div className='shopItemContainer'>
+            <span className='shopItemSeperator'><div className='shopItemSeperatorName'>Consumables</div></span>
             <div className='shopItem'>
                 <img className='shopItemImage' alt ='health potion' src={potion} onClick={() => shopBuyHandler({name: 'potion', 
                 image: potion,
@@ -44,6 +45,7 @@ function ShopWindow(props) {
                 })}></img>
                 <div className='shopItemPrice'>$20</div>
             </div>
+            <span className='shopItemSeperator'><div className='shopItemSeperatorName'>Hats</div></span>
             <div className='shopItem'>
                 <img className='shopItemImage' src={topHat} onClick={() => shopBuyHandler({name: 'Top Hat', 
                 image: topHat,

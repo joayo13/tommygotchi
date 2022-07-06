@@ -267,6 +267,22 @@
     border: 5px solid #010082;
     font-family: 'Press Start 2P', monospace;
 }
+.shopItemSeperator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    height: 2px;
+}
+.shopItemSeperatorName {
+    background-color: rgb(29, 29, 29);
+    z-index: 2;
+    padding: 5px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+}
 .inventory {
     position: absolute;
     top: 250px;
