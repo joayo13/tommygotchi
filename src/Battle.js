@@ -382,13 +382,13 @@ function Battle(props) {
     if(loaded === true) {
     if(playerHp <= 0) {
       setAttackMessage(`tommy was defeated by ${enemy.name}.`)
-      setPlayerAnimation({name: 'blinker', duration: '0.5s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
+      setPlayerAnimation({name: 'blinker', duration: '0.5s', iteration: 4, direction: 'alternate', timingFunc: 'step-start'})
       setAudio('playerdefeat')
       setTimeout(() => props.setBattling(false), 5000)
     }
     if(enemyHp <= 0) {
       setAttackMessage(`tommy defeated ${enemy.name}!`)
-      setEnemyAnimation({name: 'blinker', duration: '0.5s', iteration: 5, direction: 'alternate', timingFunc: 'step-start'})
+      setEnemyAnimation({name: 'blinker', duration: '0.5s', iteration: 4, direction: 'alternate', timingFunc: 'step-start'})
       setAudio('playervictory')
       if(enemy.xp + playerXp >= 100) {
         setLeveledUp(true)
@@ -461,14 +461,14 @@ function Battle(props) {
   </div> : null}
   {battleEnded ? <div className = 'battleEndedContainer'>
     <div className='lootInfo'>Loot:{enemy.loot}</div>
-    <div className='xpInfo'>{leveledUp ? 'LEVEL UP!!!' : `Your XP: ${playerXp}/100 Level: ${playerLevel}`}</div>
+    <div className='xpInfo'>{leveledUp ? `LEVEL UP! XP: ${playerXp}/100 Level: ${playerLevel + 1}` : `Your XP: ${playerXp}/100 Level: ${playerLevel}`}</div>
     <div className='playerStatsInfo'>
       <div className='stat'>HP:{playerStats.hp}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('hp')}>+</div> : null}</div>
       <div className='stat'>ATTACK:{playerStats.attack}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('attack')}>+</div> : null}</div>
       <div className='stat'>STRENGTH:{playerStats.str}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('str')}>+</div> : null}</div>
       <div className='stat'>DEFENCE:{playerStats.def}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('def')}>+</div> : null}</div>
     </div>
-    <div className='exitBattleButton' onClick={() => exitBattleHandler()}>exit battle</div>
+    <div className='exitBattleButton' onClick={() => exitBattleHandler()}>EXIT BATTLE</div>
   </div> : null}
   <div className = 'battleBox'><img className='battleBoxImage' src={battleBox}></img>
   <div className = 'battleBoxText' onClick={() => setFightMenu(true)}>FIGHT</div>
