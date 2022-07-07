@@ -134,6 +134,8 @@ function Battle(props) {
 
   const [playerHat, setPlayerHat] = useState(null)
 
+  const [playerInventory, setPlayerInventory] = useState(null)
+
   const [enemyLoaded, setEnemyLoaded] = useState(false)
 
   const [musicPlaying, setMusicPlaying] = useState(true)
@@ -141,6 +143,10 @@ function Battle(props) {
   const [attackMessage, setAttackMessage] = useState('') 
 
   const [fightMenu, setFightMenu] = useState(false)
+
+  const [inventoryMenu, setInventoryMenu] = useState(false)
+
+  const [inventoryPopUp, setInventoryPopUp] = useState(false)
 
   const [playerTurn, setPlayerTurn] = useState(true)
 
@@ -364,6 +370,7 @@ function Battle(props) {
     const docSnap = await getDoc(doc(db, "users", props.userId))
     if(docSnap.exists()) {
       setPlayerStats(docSnap.data().combatStats)
+      setPlayerInventory(docSnap.data().inventory)
       setTemporaryPlayerStats(docSnap.data().combatStats)
       setPlayerHp(docSnap.data().combatStats.hp)
       setPlayerXp(docSnap.data().xp)
@@ -452,7 +459,8 @@ function Battle(props) {
   async function exitBattleHandler() {
     await setDoc(doc(db, "users", props.userId), {
       xp: playerXp,
-      cashAmount: playerCash + enemy.cash
+      cashAmount: playerCash + enemy.cash,
+      inventory: playerInventory,
   }, {merge: true});
   props.setBattling(false)
 }
@@ -472,6 +480,29 @@ function Battle(props) {
   }, {merge: true});
   setLeveledUp(false)
   }
+  const inventoryItemUseHandler = (item) => {
+    if (item.name === 'potion') {
+      if(playerHp + 4 <= playerStats.hp) {
+        setPlayerHp(prev => prev + 4)
+        setAttackMessage('tommy used a health potion! it restored 4hp')
+        setPlayerInventory(playerInventory.filter((obj) => obj.id !== item.id));
+        setTimeout(() =>{setAttackMessage(''); setPlayerTurn(false); setInventoryMenu(false)}, 2000)
+      }
+    }
+}
+
+  const inventoryItemHandler = (item) => {
+    if(item.type === 'consumable') {
+        setInventoryPopUp(
+        <div className='inventoryPopUpWindow'>
+            <p className='inventoryPopUpWindowText'>Use {item.name}?</p>
+            <button className = 'inventoryPopUpWindowButton' onClick={() => {
+            inventoryItemUseHandler(item)
+            setInventoryPopUp(null)}}>Confirm</button>
+            <button className = 'inventoryPopUpWindowButton' onClick={() => setInventoryPopUp(null)}>Cancel</button>
+        </div>)
+    } 
+}
 
   const [audio, setAudio] = useState('battlemusic')
   return (
@@ -509,10 +540,13 @@ function Battle(props) {
   </div> : null}
   <div className = 'battleBox'><img className='battleBoxImage' src={battleBox}></img>
   <div className = 'battleBoxText' onClick={() => setFightMenu(true)}>FIGHT</div>
-  <div className = 'battleBoxText bag'>BAG</div>
+  <div className = 'battleBoxText bag' onClick={() => setInventoryMenu(true)}>BAG</div>
+  {inventoryMenu ? <div className='inventoryMenu'><button className='returnButton' onClick={() => setInventoryMenu(false)}>←</button>
+  {playerInventory.map(item => item.type === 'consumable' ? <img src={item.image} className = 'inventoryItem' onClick={() => inventoryItemHandler(item)}></img> : null)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   <div className = 'battleBoxText flee' onClick={() => {setAttackMessage('You ran away like a little bitch!'); setAudio('playerdefeat'); setTimeout(() => props.setBattling(false), 3000)}}>FLEE</div>
   {fightMenu ? <div className='fightMenu'><button className='returnButton' onClick={() => setFightMenu(false)}>←</button>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div>
+  {inventoryPopUp}
   {attackMessage !== '' ? <div className='attackMessageContainer'><div className='attackMessageText'>{attackMessage}</div><img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div> : <div>LOADING...</div>}
     
