@@ -312,12 +312,49 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
+        setPlayerAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setAttackMessage(`tommy used ${attack}, their rage is building!`)
         setEnemy(prev => ({
           ...prev,
           def: prev.def - 1
         }));
       }
-      setTimeout(() => {setPlayerTurn(false)}, 2000)
+      if(d20 <= 10) {
+        setAttackMessage(`tommy used ${attack}, but it missed!`)
+      }
+      setTimeout(() => {setPlayerAnimation({}); setPlayerTurn(false)}, 2000)
+    }
+  }
+  const rage = (attack, target) => {
+    let d20 = Math.ceil(Math.random() * 20)
+    if(target === 'tommy') {
+      if(d20 > 10) {
+        setEnemyAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setAttackMessage(`${enemy.name} used ${attack}, their rage is building!`)
+        setEnemy(prev => ({
+          ...prev,
+          strength: prev.strength + 1
+        }));
+      }
+      if(d20 <= 10) {
+        setAttackMessage(`${enemy.name} used ${attack}, but it missed!`)
+      }
+      setTimeout(() => {setEnemyAnimation({}); setPlayerTurn(true)}, 2000)
+    }
+
+    if(target === 'enemy') {
+      if(d20 > 10) {
+        setPlayerAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setAttackMessage(`tommy used ${attack}, their rage is building!`)
+        setTemporaryPlayerStats(prev => ({
+          ...prev,
+          str: prev.str - 1
+        }));
+      }
+      if(d20 <= 10) {
+        setAttackMessage(`tommy used ${attack}, but it missed!`)
+      }
+      setTimeout(() => {setPlayerAnimation({}); setPlayerTurn(false)}, 2000)
     }
   }
 
