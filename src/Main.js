@@ -354,10 +354,6 @@ function Main(props) {
     },[foodAmount, loaded])
 
     const foodAmountHandler = (timer) => {
-        console.log(foodAmount)
-        if(foodAmount <= 0) {
-                setHp(prevHp => prevHp - 12.5)
-        }
         clearTimeout(timer)
         foodTimer.current = null
         setFoodAmount(prevFoodAmount => prevFoodAmount - 1)
