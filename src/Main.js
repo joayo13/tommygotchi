@@ -123,7 +123,7 @@ function Main(props) {
             if(docSnap.data().foodAmount - timePassedFoodAmount <= 0 || docSnap.data().hygieneAmount - timePassedHygieneAmount <= 0) {
                 setFoodAmount(0)
                 setHygieneAmount(0)
-                if(timePassed >= 200000) {
+                if(timePassed >= 300000) {
                     setHp(25)
                     setDisciplineAmount(0)
                     setMood(tommyDead)
@@ -137,7 +137,7 @@ function Main(props) {
                     setLoaded(true)
                     return
                 }
-                if(timePassed >= 100000 && timePassed < 200000) {
+                if(timePassed >= 150000 && timePassed < 300000) {
                     setHp(docSnap.data().hp - 125)
                     setDisciplineAmount(docSnap.data().disciplineAmount - 10)
                     setDisciplineDisabled(false)
@@ -154,7 +154,7 @@ function Main(props) {
                     return
 
                 }
-                if(timePassed >= 50000 && timePassed < 100000) {
+                if(timePassed >= 50000 && timePassed < 150000) {
                     setHp(docSnap.data().hp - 50)
                     setDisciplineDisabled(false)
                     setDisciplineAmount(docSnap.data().disciplineAmount - 5)
