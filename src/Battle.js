@@ -59,7 +59,7 @@ const enemiesLevel1to3 = [
     strength: 3,
     loot: '50$',
     cash: 50,
-    xp: 10,
+    xp: 30,
     attacks: ['quick attack',]
   },
   {
@@ -71,7 +71,7 @@ const enemiesLevel1to3 = [
     strength: 3,
     loot: '70$',
     cash: 70,
-    xp: 15,
+    xp: 40,
     attacks: ['quick attack', 'power attack']
   },
   {
@@ -83,7 +83,7 @@ const enemiesLevel1to3 = [
    strength: 5,
    loot: '100$',
    cash: 100,
-   xp: 20,
+   xp: 50,
    attacks: ['power attack', 'intimidate']
   }
 ]
@@ -529,7 +529,7 @@ function Battle(props) {
   </div> : null}
   {battleEnded ? <div className = 'battleEndedContainer'>
     <div className='lootInfo'>Loot:{enemy.loot}</div>
-    <div className='xpInfo'>{leveledUp ? `LEVEL UP! XP: ${playerXp}/100 Level: ${playerLevel + 1}` : `Your XP: ${playerXp}/100 Level: ${playerLevel}`}</div>
+    <div className='xpInfo'>{leveledUp ? `LVL UP! XP: ${playerXp}/100 Level: ${playerLevel + 1}` : `Your XP: ${playerXp}/100 Level: ${playerLevel}`}</div>
     <div className='playerStatsInfo'>
       <div className='stat'>HP:{playerStats.hp}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('hp')}>+</div> : null}</div>
       <div className='stat'>ATTACK:{playerStats.attack}{leveledUp ? <div className='levelUpStat' onClick={()=> levelUpHandler('attack')}>+</div> : null}</div>
