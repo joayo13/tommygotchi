@@ -87,7 +87,7 @@ function Login(props) {
                 inventory: [],
                 currentHat: null,
                 currentWeapon: null,
-                combatStats: {name: 'tommy', hp: 10, attack: 1, def: 1, str: 1, attacks: ['quick attack', 'power attack']},
+                combatStats: {name: 'tommy', hp: 10, attack: 1, def: 1, str: 1, attacks: ['quick attack']},
                 level: 1,
                 xp: 0,
             });

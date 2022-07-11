@@ -148,6 +148,8 @@ function Battle(props) {
 
   const [inventoryPopUp, setInventoryPopUp] = useState(false)
 
+  const [newMovePopUp, setNewMovePopUp] = useState(false)
+
   const [playerTurn, setPlayerTurn] = useState(true)
 
   const [healthBarVisible, setHealthBarVisible] = useState(false)
@@ -441,7 +443,7 @@ function Battle(props) {
       if(enemy.xp + playerXp < 100) {
         setPlayerXp(prevXp => prevXp + enemy.xp)
       }
-      setTimeout(() => setBattleEnded(true), 5000)
+      setTimeout(() => {levelUpNewMove(); setBattleEnded(true)}, 5000)
     }
   }
   },[playerHp, enemyHp, loaded])
@@ -464,6 +466,22 @@ function Battle(props) {
   }, {merge: true});
   props.setBattling(false)
 }
+  async function levelUpNewMove() {
+      if(playerLevel + 1 === 2) {
+        await setDoc(doc(db, "users", props.userId), {
+          combatStats: {
+            attacks: ['quick attack', 'power attack']
+          }
+        }, {merge: true});
+        setNewMovePopUp(<div className='newMovePopUpWindow'>
+          <div className='newMovePopUpWindowText'>
+            Tommy learned Power Attack!
+          </div>
+          <p style={{fontSize: '10px'}}>Power Attack deals more damage at the expense of accuracy.</p>
+          <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
+        </div>)
+      } 
+  }
 
   async function levelUpHandler(stat) {
     if(stat === 'hp') {
@@ -546,6 +564,7 @@ function Battle(props) {
   <div className = 'battleBoxText flee' onClick={() => {setAttackMessage('You ran away like a little bitch!'); setAudio('playerdefeat'); setTimeout(() => props.setBattling(false), 3000)}}>FLEE</div>
   {fightMenu ? <div className='fightMenu'><button className='returnButton' onClick={() => setFightMenu(false)}>←</button>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div>
+  {newMovePopUp}
   {inventoryPopUp}
   {attackMessage !== '' ? <div className='attackMessageContainer'><div className='attackMessageText'>{attackMessage}</div><img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div> : <div>LOADING...</div>}

@@ -325,6 +325,34 @@
     border: 5px solid rgb(23, 23, 23);
     font-family: 'Press Start 2P', monospace;
 }
+
+.newMovePopUpWindow {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: 999;
+    background-color: rgb(43, 145, 158);
+    color: white;
+    height: 400px;
+    width: 325px;
+    top: 150px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+}
+.newMovePopUpWindowText {
+    margin-top: 75px;
+}
+
+.newMovePopUpWindowButton {
+    position: absolute;
+    bottom: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    height: 40px;
+    border: 5px solid rgb(23, 23, 23);
+    font-family: 'Press Start 2P', monospace;
+}
   
   @keyframes blinker {
     50% {
