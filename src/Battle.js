@@ -321,7 +321,7 @@ function Battle(props) {
     if(target === 'enemy') {
       if(d20 > 10) {
         setPlayerAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
-        setAttackMessage(`tommy used ${attack}, their rage is building!`)
+        setAttackMessage(`tommy used ${attack}, it lowered the foes defense!`)
         setEnemy(prev => ({
           ...prev,
           def: prev.def - 1
@@ -478,6 +478,20 @@ function Battle(props) {
             Tommy learned Power Attack!
           </div>
           <p style={{fontSize: '10px'}}>Power Attack deals more damage at the expense of accuracy.</p>
+          <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
+        </div>)
+      } 
+      if(playerLevel + 1 === 3) {
+        await setDoc(doc(db, "users", props.userId), {
+          combatStats: {
+            attacks: ['quick attack', 'power attack', 'intimidate']
+          }
+        }, {merge: true});
+        setNewMovePopUp(<div className='newMovePopUpWindow'>
+          <div className='newMovePopUpWindowText'>
+            Tommy learned Intimidate!
+          </div>
+          <p style={{fontSize: '10px'}}>Intimidate has a 50/50 chance to hit. If it does, lower the targets defence by 1. Perfect for setting up Power Attacks.</p>
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
         </div>)
       } 
