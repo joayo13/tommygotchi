@@ -164,7 +164,8 @@
 }
 @keyframes shaker {
     50% {
-        transform: translateX(-5px);
+        transform: translateX(-10px);
+        filter: saturate(20)
     }
 }
 

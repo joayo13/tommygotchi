@@ -60,7 +60,7 @@ const enemiesLevel1to3 = [
     loot: '50$',
     cash: 50,
     xp: 30,
-    attacks: ['quick attack',]
+    attacks: ['quick attack']
   },
   {
     name: `lisa's mom`,
@@ -89,9 +89,9 @@ const enemiesLevel1to3 = [
 ]
 const enemiesLevel4to6 = []
 
-const enemiesLevel6to8 = []
+const enemiesLevel7to9 = []
 
-const enemiesLevel8to10 = [
+const enemiesLevel10 = [
   {
     name: 'mark',
     hp: 20,
@@ -337,7 +337,7 @@ function Battle(props) {
     let d20 = Math.ceil(Math.random() * 20)
     if(target === 'tommy') {
       if(d20 > 10) {
-        setEnemyAnimation({name: 'shaker', duration: '0.5s', iteration: 5, direction: 'alternate'})
+        setEnemyAnimation({name: 'shaker', duration: '0.1s', iteration: 15, direction: 'alternate'})
         setAttackMessage(`${enemy.name} used ${attack}, their rage is building!`)
         setEnemy(prev => ({
           ...prev,
@@ -352,7 +352,7 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
-        setPlayerAnimation({name: 'shaker', duration: '0.5s', iteration: 5, direction: 'alternate'})
+        setPlayerAnimation({name: 'shaker', duration: '0.1s', iteration: 15, direction: 'alternate'})
         setAttackMessage(`tommy used ${attack}, their rage is building!`)
         setTemporaryPlayerStats(prev => ({
           ...prev,
