@@ -320,7 +320,7 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
-        setPlayerAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setPlayerAnimation({name: 'grower', duration: '1s', iteration: 1, direction: 'alternate'})
         setAttackMessage(`tommy used ${attack}, it lowered the foes defense!`)
         setEnemy(prev => ({
           ...prev,
@@ -333,11 +333,11 @@ function Battle(props) {
       setTimeout(() => {setPlayerAnimation({}); setPlayerTurn(false)}, 2000)
     }
   }
-  const rage = (attack, target) => {
+  const rageHandler = (attack, target) => {
     let d20 = Math.ceil(Math.random() * 20)
     if(target === 'tommy') {
       if(d20 > 10) {
-        setEnemyAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setEnemyAnimation({name: 'shaker', duration: '0.5s', iteration: 5, direction: 'alternate'})
         setAttackMessage(`${enemy.name} used ${attack}, their rage is building!`)
         setEnemy(prev => ({
           ...prev,
@@ -352,7 +352,7 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
-        setPlayerAnimation({name: 'grower', duration: '0.5s', iteration: 3, direction: 'alternate'})
+        setPlayerAnimation({name: 'shaker', duration: '0.5s', iteration: 5, direction: 'alternate'})
         setAttackMessage(`tommy used ${attack}, their rage is building!`)
         setTemporaryPlayerStats(prev => ({
           ...prev,
@@ -406,6 +406,7 @@ function Battle(props) {
     if(attack === 'quick attack') quickAttackHandler(attack, target)
     if(attack === 'power attack') powerAttackHandler(attack, target)
     if(attack === 'intimidate') intimidateHandler(attack, target)
+    if(attack === 'rage') rageHandler(attack, target)
   }
 
   const enemyAttackHandler = (enemyAttacks) => {
@@ -492,6 +493,20 @@ function Battle(props) {
             Tommy learned Intimidate!
           </div>
           <p style={{fontSize: '10px'}}>Intimidate has a 50/50 chance to hit. If it does, lower the targets defence by 1. Perfect for setting up Power Attacks.</p>
+          <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
+        </div>)
+      } 
+      if(playerLevel + 1 === 4) {
+        await setDoc(doc(db, "users", props.userId), {
+          combatStats: {
+            attacks: ['quick attack', 'power attack', 'intimidate', 'rage']
+          }
+        }, {merge: true});
+        setNewMovePopUp(<div className='newMovePopUpWindow'>
+          <div className='newMovePopUpWindowText'>
+            Tommy learned Rage!
+          </div>
+          <p style={{fontSize: '10px'}}>Rage has a 50/50 chance to hit. If it does, increase your strength by 1.</p>
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
         </div>)
       } 
