@@ -476,7 +476,7 @@ function Battle(props) {
         }, {merge: true});
         setNewMovePopUp(<div className='newMovePopUpWindow'>
           <div className='newMovePopUpWindowText'>
-            Tommy learned Power Attack!
+            Tommy learned <span style={{color: 'red'}}>Power Attack!</span>
           </div>
           <p style={{fontSize: '10px'}}>Power Attack deals more damage at the expense of accuracy.</p>
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
@@ -490,7 +490,7 @@ function Battle(props) {
         }, {merge: true});
         setNewMovePopUp(<div className='newMovePopUpWindow'>
           <div className='newMovePopUpWindowText'>
-            Tommy learned Intimidate!
+            Tommy learned <span style={{color: 'red'}}>Intimidate!</span>
           </div>
           <p style={{fontSize: '10px'}}>Intimidate has a 50/50 chance to hit. If it does, lower the targets defence by 1. Perfect for setting up Power Attacks.</p>
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
@@ -504,7 +504,7 @@ function Battle(props) {
         }, {merge: true});
         setNewMovePopUp(<div className='newMovePopUpWindow'>
           <div className='newMovePopUpWindowText'>
-            Tommy learned Rage!
+            Tommy learned <span style={{color: 'red'}}>Rage!</span>
           </div>
           <p style={{fontSize: '10px'}}>Rage has a 50/50 chance to hit. If it does, increase your strength by 1.</p>
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
