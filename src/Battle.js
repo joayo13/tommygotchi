@@ -356,7 +356,7 @@ function Battle(props) {
         setAttackMessage(`tommy used ${attack}, their rage is building!`)
         setTemporaryPlayerStats(prev => ({
           ...prev,
-          str: prev.str - 1
+          str: prev.str + 1
         }));
       }
       if(d20 <= 10) {
