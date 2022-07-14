@@ -10,6 +10,10 @@ const wizardHat = require('./wizardhat.png')
 
 const redWizardHat = require('./redwizardhat.png')
 
+const goldWizardHat = require('./goldwizardhat.png')
+
+const marioHat = require('./mariohat.png')
+
 function ShopWindow(props) {
     const shopBuyHandler = (item) => {
         if(props.cashAmount - item.price >= 0) {
@@ -69,6 +73,22 @@ function ShopWindow(props) {
                 type: 'hat',
                 })}></img>
                 <div className='shopItemPrice'>$2000</div>
+            </div>
+            <div className='shopItem'>
+            <img className='shopItemImage' src={goldWizardHat} onClick={() => shopBuyHandler({name: 'Gold Wizard Hat', 
+                image: goldWizardHat,
+                price: 5000, 
+                type: 'hat',
+                })}></img>
+                <div className='shopItemPrice'>$5000</div>
+            </div>
+            <div className='shopItem'>
+            <img className='shopItemImage' src={marioHat} onClick={() => shopBuyHandler({name: 'Mario Hat', 
+                image: marioHat,
+                price: 500, 
+                type: 'hat',
+                })}></img>
+                <div className='shopItemPrice'>$500</div>
             </div>
             </div>
         </div>
