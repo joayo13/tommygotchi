@@ -48,6 +48,8 @@ const playSound = require('./playsound.png')
 
 const muteSound = require('./mutesound.png')
 
+const quickAttackSound = new Audio('/quickattack.mp3')
+
 const enemiesLevel1to3 = [
   
   {
@@ -172,6 +174,7 @@ function Battle(props) {
         if(playerHp - ENEMY_DMG <= 0) {
           setPlayerHp(prevPlayerHp => prevPlayerHp - ENEMY_DMG)
           setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          quickAttackSound.play()
           setPlayerHpModifier(`-${ENEMY_DMG}`)
           setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerHpModifier(null)}, 2000)
           return
@@ -179,6 +182,7 @@ function Battle(props) {
         if(d20 === 20) {
         setPlayerHp(prevPlayerHp => prevPlayerHp - (ENEMY_DMG * 2))
         setEnemyAnimation({name: 'enemyQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        quickAttackSound.play()
         setAttackMessage(`${enemy.name} used ${attack}, it's a critical hit!`)
         setPlayerHpModifier(`-${ENEMY_DMG * 2}`)
         setTimeout(() => {setPlayerAnimation({}); setEnemyAnimation({}); setPlayerTurn(true); setPlayerHpModifier(null)}, 2000)
@@ -201,18 +205,21 @@ function Battle(props) {
         if(enemyHp - PLAYER_DMG <= 0) {
           setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
           setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+          quickAttackSound.play()
           setEnemyHpModifier(`-${PLAYER_DMG}`)
           setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setEnemyHpModifier(null)}, 2000)
         }
         if(d20 === 20) {
         setEnemyHp(prevEnemyHp => prevEnemyHp - (PLAYER_DMG * 2))
         setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
+        quickAttackSound.play()
         setAttackMessage(`tommy used ${attack}, it's a critical hit!`)
         setEnemyHpModifier(`-${PLAYER_DMG * 2}`)
         setTimeout(() => {setEnemyAnimation({}); setPlayerAnimation({}); setPlayerTurn(false);setEnemyHpModifier(null)}, 2000) 
         return
         }
         setEnemyHp(prevEnemyHp => prevEnemyHp - PLAYER_DMG)
+        quickAttackSound.play()
         setPlayerAnimation({name: 'playerQuickAttack', duration: '0.1s', iteration: 2, direction: 'alternate',})
         setAttackMessage(`tommy used ${attack}`)
         setEnemyHpModifier(`-${PLAYER_DMG}`)
