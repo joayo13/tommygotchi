@@ -192,6 +192,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    gap: 0.5rem;
     flex-wrap: wrap;
     align-items: center;
     height: 150px;
@@ -212,7 +213,10 @@
 .playerAttacks {
     cursor: pointer;
     height: 50px;
-    width: 150px;
+    width: 125px;
+    font-size: 12px;
+    border: 2px solid black;
+    color: black;
     font-family: 'Press Start 2P';
     display: flex;
     align-items: center;
@@ -230,7 +234,7 @@
     border: none;
     background-color:#ff0000;
     color: white;
-    z-index: 2;
+    z-index: 5;
 }
 .inventoryItem {
     cursor: pointer;

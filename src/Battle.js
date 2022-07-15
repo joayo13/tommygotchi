@@ -598,7 +598,7 @@ function Battle(props) {
   {inventoryMenu ? <div className='inventoryMenu'><button className='returnButton' onClick={() => setInventoryMenu(false)}>←</button>
   {playerInventory.map(item => item.type === 'consumable' ? <img src={item.image} className = 'inventoryItem' onClick={() => inventoryItemHandler(item)}></img> : null)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   <div className = 'battleBoxText flee' onClick={() => {setAttackMessage('You ran away like a little bitch!'); setAudio('playerdefeat'); setTimeout(() => props.setBattling(false), 3000)}}>FLEE</div>
-  {fightMenu ? <div className='fightMenu'><button className='returnButton' onClick={() => setFightMenu(false)}>←</button>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
+  {fightMenu ? <div className='fightMenu'><button className='returnButton' onClick={() => setFightMenu(false)}>←</button>{playerStats.attacks.map(item => <div className='playerAttacks' onClick={() => attackHandler(item, 'enemy')}>{item.toUpperCase()}</div>)}<img className='battleBoxImage' src={battleBox}></img></div> : null}
   </div>
   {newMovePopUp}
   {inventoryPopUp}
