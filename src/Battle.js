@@ -52,6 +52,10 @@ const quickAttackSound = new Audio('/quickattack.mp3')
 
 const powerAttackSound = new Audio('/powerattack.mp3')
 
+const rageSound = new Audio('/rage.mp3')
+
+const intimidateSound = new Audio('/intimidate.mp3')
+
 const enemiesLevel1to3 = [
   
   {
@@ -312,6 +316,7 @@ function Battle(props) {
     let d20 = Math.ceil(Math.random() * 20)
     if(target === 'tommy') {
       if(d20 > 10) {
+        intimidateSound.play()
         setEnemyAnimation({name: 'grower', duration: '1s', iteration: 1, direction: 'alternate'})
         setAttackMessage(`${enemy.name} used ${attack}, it lowered your defense!`)
         setTemporaryPlayerStats(prev => ({
@@ -327,6 +332,7 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
+        intimidateSound.play()
         setPlayerAnimation({name: 'grower', duration: '1s', iteration: 1, direction: 'alternate'})
         setAttackMessage(`tommy used ${attack}, it lowered the foes defense!`)
         setEnemy(prev => ({
@@ -344,6 +350,7 @@ function Battle(props) {
     let d20 = Math.ceil(Math.random() * 20)
     if(target === 'tommy') {
       if(d20 > 10) {
+        rageSound.play()
         setEnemyAnimation({name: 'shaker', duration: '0.1s', iteration: 15, direction: 'alternate'})
         setAttackMessage(`${enemy.name} used ${attack}, their rage is building!`)
         setEnemy(prev => ({
@@ -359,6 +366,7 @@ function Battle(props) {
 
     if(target === 'enemy') {
       if(d20 > 10) {
+        rageSound.play()
         setPlayerAnimation({name: 'shaker', duration: '0.1s', iteration: 15, direction: 'alternate'})
         setAttackMessage(`tommy used ${attack}, their rage is building!`)
         setTemporaryPlayerStats(prev => ({
