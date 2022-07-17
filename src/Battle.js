@@ -549,6 +549,29 @@ function Battle(props) {
         setAttackMessage('tommy used a health potion! it restored 4hp')
         setPlayerInventory(playerInventory.filter((obj) => obj.id !== item.id));
         setTimeout(() =>{setAttackMessage(''); setPlayerTurn(false); setInventoryMenu(false)}, 2000)
+      } else {
+        let hpGap = playerStats.hp - playerHp
+        setPlayerHp(playerStats.hp) 
+        setAttackMessage(`tommy used a health potion! it restored ${hpGap} hp`)
+        setPlayerInventory(playerInventory.filter((obj) => obj.id !== item.id));
+        setTimeout(() =>{setAttackMessage(''); setPlayerTurn(false); setInventoryMenu(false)}, 2000)
+        
+      }
+    }
+    if(item.name === 'greater potion') {
+      if(playerHp + 10 <= playerStats.hp) {
+        setPlayerHp(prev => prev + 4)
+        setAttackMessage('tommy used a greater health potion! it restored 10hp')
+        setPlayerInventory(playerInventory.filter((obj) => obj.id !== item.id));
+        setTimeout(() =>{setAttackMessage(''); setPlayerTurn(false); setInventoryMenu(false)}, 2000)
+      }
+      else {
+        let hpGap = playerStats.hp - playerHp
+        setPlayerHp(playerStats.hp) 
+        setAttackMessage(`tommy used a health potion! it restored ${hpGap} hp`)
+        setPlayerInventory(playerInventory.filter((obj) => obj.id !== item.id));
+        setTimeout(() =>{setAttackMessage(''); setPlayerTurn(false); setInventoryMenu(false)}, 2000)
+        
       }
     }
 }

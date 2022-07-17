@@ -4,6 +4,8 @@ import uniqid from 'uniqid'
 
 const potion = require('./potion.png')
 
+const greaterPotion = require('./greaterpotion.png')
+
 const topHat = require('./tophat.png')
 
 const wizardHat = require('./wizardhat.png')
@@ -44,10 +46,18 @@ function ShopWindow(props) {
             <div className='shopItem'>
                 <img className='shopItemImage' alt ='health potion' src={potion} onClick={() => shopBuyHandler({name: 'potion', 
                 image: potion,
-                price: 20, 
+                price: 100, 
                 type: 'consumable',
                 })}></img>
-                <div className='shopItemPrice'>$20</div>
+                <div className='shopItemPrice'>$100</div>
+            </div>
+            <div className='shopItem'>
+                <img className='shopItemImage' alt ='greater health potion' src={greaterPotion} onClick={() => shopBuyHandler({name: 'greater potion', 
+                image: greaterPotion,
+                price: 500, 
+                type: 'consumable',
+                })}></img>
+                <div className='shopItemPrice'>$500</div>
             </div>
             <span className='shopItemSeperator'><div className='shopItemSeperatorName'>Hats</div></span>
             <div className='shopItem'>
@@ -61,10 +71,10 @@ function ShopWindow(props) {
             <div className='shopItem'>
             <img className='shopItemImage' src={wizardHat} onClick={() => shopBuyHandler({name: 'Wizard Hat', 
                 image: wizardHat,
-                price: 500, 
+                price: 1000, 
                 type: 'hat',
                 })}></img>
-                <div className='shopItemPrice'>$500</div>
+                <div className='shopItemPrice'>$1000</div>
             </div>
             <div className='shopItem'>
             <img className='shopItemImage' src={redWizardHat} onClick={() => shopBuyHandler({name: 'Red Wizard Hat', 
@@ -77,10 +87,10 @@ function ShopWindow(props) {
             <div className='shopItem'>
             <img className='shopItemImage' src={goldWizardHat} onClick={() => shopBuyHandler({name: 'Gold Wizard Hat', 
                 image: goldWizardHat,
-                price: 5000, 
+                price: 4000, 
                 type: 'hat',
                 })}></img>
-                <div className='shopItemPrice'>$5000</div>
+                <div className='shopItemPrice'>$4000</div>
             </div>
             <div className='shopItem'>
             <img className='shopItemImage' src={marioHat} onClick={() => shopBuyHandler({name: 'Mario Hat', 
