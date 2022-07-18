@@ -124,6 +124,7 @@ function Main(props) {
             if(docSnap.data().foodAmount - timePassedFoodAmount <= 0 || docSnap.data().hygieneAmount - timePassedHygieneAmount <= 0) {
                 setFoodAmount(0)
                 setHygieneAmount(0)
+                setPoopX([20, 30, 40])
                 if(timePassed >= 300000) {
                     setHp(25)
                     setDisciplineAmount(0)
@@ -134,7 +135,6 @@ function Main(props) {
                     setCashAmount(docSnap.data().cashAmount)
                     setAbuse(docSnap.data().abuse)
                     setAbuseAmount(docSnap.data().abuseAmount)
-                    setPoopX(docSnap.data().poopX)
                     setLoaded(true)
                     return
                 }
@@ -148,7 +148,6 @@ function Main(props) {
                     setCashAmount(docSnap.data().cashAmount)
                     setAbuse(docSnap.data().abuse)
                     setAbuseAmount(docSnap.data().abuseAmount)
-                    setPoopX(docSnap.data().poopX)
                     setMood(docSnap.data().mood)
                     setLoaded(true)
                     tommyAge = tommyAgeCalculator
@@ -165,7 +164,6 @@ function Main(props) {
                     setCashAmount(docSnap.data().cashAmount)
                     setAbuse(docSnap.data().abuse)
                     setAbuseAmount(docSnap.data().abuseAmount)
-                    setPoopX(docSnap.data().poopX)
                     setMood(docSnap.data().mood)
                     setLoaded(true)
                     tommyAge = tommyAgeCalculator
