@@ -455,11 +455,12 @@ function Battle(props) {
       if(enemy.xp + playerXp >= 100) {
         setLeveledUp(true)
         setPlayerXp(prevXp => (prevXp + enemy.xp) - 100)
+        levelUpNewMove()
       }
       if(enemy.xp + playerXp < 100) {
         setPlayerXp(prevXp => prevXp + enemy.xp)
       }
-      setTimeout(() => {levelUpNewMove(); setBattleEnded(true)}, 5000)
+      setTimeout(() => { setBattleEnded(true)}, 5000)
     }
   }
   },[playerHp, enemyHp, loaded])
