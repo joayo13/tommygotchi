@@ -42,6 +42,12 @@ const mark = require('./mark.png')
 
 const doggie = require('./doggie.png')
 
+const theDrugDealer = require('./thedrugdealer.png')
+
+const peterThePsychologist = require('./peterthepsychologist.png')
+
+const underwearGuy = require('./underwearguy.png')
+
 const battleBox = require('./battlebox.png')
 
 const playSound = require('./playsound.png')
@@ -67,7 +73,7 @@ const enemiesLevel1to3 = [
     strength: 3,
     loot: '50$',
     cash: 50,
-    xp: 30,
+    xp: 20,
     attacks: ['quick attack']
   },
   {
@@ -79,7 +85,7 @@ const enemiesLevel1to3 = [
     strength: 3,
     loot: '70$',
     cash: 70,
-    xp: 40,
+    xp: 30,
     attacks: ['quick attack', 'power attack']
   },
   {
@@ -91,7 +97,7 @@ const enemiesLevel1to3 = [
    strength: 5,
    loot: '100$',
    cash: 100,
-   xp: 50,
+   xp: 35,
    attacks: ['power attack', 'intimidate']
   }
 ]
@@ -512,7 +518,7 @@ function Battle(props) {
           <button className='newMovePopUpWindowButton' onClick={() => setNewMovePopUp(false)}>Okay</button>
         </div>)
       } 
-      if(playerLevel + 1 === 4) {
+      if(playerLevel + 1 === 5) {
         await setDoc(doc(db, "users", props.userId), {
           combatStats: {
             attacks: ['quick attack', 'power attack', 'intimidate', 'rage']
