@@ -101,7 +101,44 @@ const enemiesLevel1to3 = [
    attacks: ['power attack', 'intimidate']
   }
 ]
-const enemiesLevel4to6 = []
+const enemiesLevel4to6 = [
+  {
+   name: 'the drug dealer',
+   hp: 10,
+   image: theDrugDealer,
+   def: 4,
+   attack: 2,
+   strength: 2,
+   loot: '100$',
+   cash: 100,
+   xp: 35,
+   attacks: ['power attack', 'rage']
+  },
+  {
+    name: 'peter the psychologist',
+    hp: 14,
+    image: peterThePsychologist,
+    def: 2,
+    attack: 1,
+    strength: 1,
+    loot: '100$',
+    cash: 100,
+    xp: 35,
+    attacks: ['quick attack',]
+  },
+  {
+    name: 'underwear guy',
+    hp: 8,
+    image: doggie,
+    def: 2,
+    attack: 4,
+    strength: 2,
+    loot: '100$',
+    cash: 100,
+    xp: 35,
+    attacks: ['power attack', 'intimidate']
+  },
+]
 
 const enemiesLevel7to9 = []
 
@@ -406,8 +443,13 @@ function Battle(props) {
   useEffect(() => {
     if(playerLevel <= 3) {
       let random = Math.floor(Math.random() * enemiesLevel1to3.length)
-    setEnemy(enemiesLevel1to3[random])
-    setEnemyLoaded(true)
+      setEnemy(enemiesLevel1to3[random])
+      setEnemyLoaded(true)
+    }
+    if(playerLevel > 3 && playerLevel <= 6) {
+      let random = Math.floor(Math.random() * enemiesLevel4to6.length)
+      setEnemy(enemiesLevel4to6[random])
+      setEnemyLoaded(true)
     }
     
   },[])
